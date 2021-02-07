@@ -9,7 +9,19 @@
 </style>
 
 <div class="example-wrapper">
-  <label for="city">Ville : </label>
-    <input type="text" name="city" placeholder="entrer le nom de la ville" id="city-input">
+  <form>
+  <div class="mb-3">
+    <label for="cityInput" class="form-label">City</label>
+    <input type="text" class="form-control" id="cityInput" aria-describedby="enter the city">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </div>
+<script type="text/javascript">
+  function activatePlacesSearch(){
+    let input = document.getElementById('cityInput');
+    let = autocomplete = new google.maps.places.Autocomplete(input);
+  }
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcGAJIRaCDOGIw0GHUBPlMtDH29CVA3ug&libraries=places&callback=activatePlacesSearch"></script>
 {% endblock %}
