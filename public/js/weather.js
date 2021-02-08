@@ -1,0 +1,31 @@
+/*
+* Fonction qui va appeler l'API de openweathermap et changer le code HTMl de la page */
+function fetchWeather() {
+    let input = document.getElementById("weather_form_city").value; //nom de la ville entrer par l'utilisateur
+
+    //Variable pour la modification du code HTML
+    let name =  document.getElementById("name");
+    let desc =  document.getElementById("desc");
+    let temp =  document.getElementById("temp");
+
+    input = input.replace(/\s+/g, ''); //suppression des espaces dans l'entrer de l'user
+
+
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+input+'&appid=215c92aa2e136fb81b0cc8eaaab09a4c&units=metric')//Appeler l'API avec l'input de l'user
+    .then(response => response.json())//recuperer le contenu en JSON
+        .then(data => {
+            //Recuperer les infos qui nous interesse
+            let nameValue = data['name'];
+            let tempValue = data['main']['temp'];
+            let descValue = data['weather'][0]['description'];
+
+            //Modification du code HTML
+            name.innerHTML = nameValue;
+            temp.innerHTML = tempValue +"°c";
+            desc.innerHTML = descValue;
+        })
+
+        //Recupere le code d'erreur envoie une alerte a l'user
+        .catch(err => alert("Enter a valid city name"))
+
+}
